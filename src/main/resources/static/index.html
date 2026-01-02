@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="appCadastro">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Cliente</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+
+<body ng-controller="ClienteController">
+
+    <h2>Cadastro</h2>
+
+    <form ng-submit="salvar()">
+        <input type="text" ng-model="cliente.nome" placeholder="Nome" required>
+        <input type="email" ng-model="cliente.email" placeholder="Email" required>
+        <button type="submit">Salvar</button>
+    </form>
+
+    <hr>
+
+    <table border="1">
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+        </tr>
+        <tr ng-repeat="c in clientes">
+            <td>{{c.nome}}</td>
+            <td>{{c.email}}</td>
+        </tr>
+    </table>
+
+</body>
+</html>
