@@ -3,8 +3,8 @@ package com.gssinformatica.terraparque.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "cliente")
-public class Cliente {
+@Table(name = "colaborador")
+public class Colaborador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +17,7 @@ public class Cliente {
     private String email;
 
     // construtor vazio (obrigatório para JPA)
-    public Cliente() {
+    public Colaborador() {
     }
 
     // getters e setters

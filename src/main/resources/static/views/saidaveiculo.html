@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html ng-app="saidaVeiculoCadastro" >
+<head>
+    <meta charset="UTF-8">
+    <title>Saída de Veículo</title>
+
+ <!-- AngularJS -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+<!-- AngularJS Animate e Aria (OBRIGATÓRIOS) -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-aria.min.js"></script>
+
+<!-- Angular Material -->
+<link rel="stylesheet"
+      href="https://ajax.googleapis.com/ajax/libs/angular_material/1.2.5/angular-material.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.2.5/angular-material.min.js"></script>
+
+    <script src="app.js"></script>
+    <script src="saidaVeiculo.controller.js"></script>
+</head>
+
+<body ng-app="appCadastro" ng-controller="SaidaVeiculoController" layout="column">
+    
+    <md-content layout-padding>
+
+    <h2>Nova Saída</h2>
+
+    <form ng-submit="salvar()">
+        <md-input-container class="md-block">
+            <label>Motorista</label>
+            <input ng-model="saida.nomeMotorista" required>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>Motorista</label>
+            <input ng-model="saida.nomeMotorista" required>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>Placa do Veículo</label>
+            <input ng-model="saida.veiculoPlaca" required>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>KM do Veículo</label>
+            <input ng-model="saida.veiculoKm" required>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>Motivo da Saída</label>
+            <input ng-model="saida.motivoSaida" required>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>Observações</label>
+            <input ng-model="saida.observacoes" required>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>Data / Hora - Saída</label>
+            <input type="datetime-local" ng-model="saida.dataHoraSaida" required>
+        </md-input-container>
+
+        <md-button class="md-raised md-primary" type="submit">
+            Salvar
+        </md-button>
+    </form>
+
+    <hr>
+
+    <table border="1">
+        <tr>
+            <th>Nome do Motorista</th>
+            <th>Placa do Veículo</th>
+            <th>KM do Veículo</th>
+            <th>Motivo da Saída</th>
+            <th>Observações da Saída</th>
+            <th>Data e Hora da Saída</th>
+        </tr>
+        <tr ng-repeat="s in saidas">
+            <td>{{s.nomeMotorista}}</td>
+            <td>{{s.veiculoPlaca}}</td>
+            <td>{{s.veiculoKm}}</td>
+            <td>{{s.motivoSaida}}</td>
+            <td>{{s.observacoes}}</td>
+            <td>{{s.dataHoraSaida}}</td>
+        </tr>
+    </table>
+
+    </md-content>
+</body>
+</html>

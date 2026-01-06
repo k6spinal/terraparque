@@ -1,0 +1,36 @@
+<h2>Cadastro de Colaborador</h2>
+
+<form ng-submit="salvar()">
+    <input type="text"
+           ng-model="colaborador.nome"
+           placeholder="Nome"
+           required
+           class="form-control mb-2">
+
+    <input type="email"
+           ng-model="colaborador.email"
+           placeholder="Email"
+           required
+           class="form-control mb-2">
+
+    <button type="submit" class="btn btn-primary">
+        Salvar
+    </button>
+</form>
+
+<hr>
+
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="c in colaboradores">
+            <td>{{c.nome}}</td>
+            <td>{{c.email}}</td>
+        </tr>
+    </tbody>
+</table>

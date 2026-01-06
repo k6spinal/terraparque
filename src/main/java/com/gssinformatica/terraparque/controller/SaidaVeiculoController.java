@@ -10,26 +10,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gssinformatica.terraparque.model.Cliente;
-import com.gssinformatica.terraparque.repository.ClienteRepository;
+import com.gssinformatica.terraparque.model.SaidaVeiculo;
+import com.gssinformatica.terraparque.repository.SaidaVeiculoRepository;
 
 
 @RestController
-@RequestMapping("/api/clientes")
+@RequestMapping("/api/saidaveiculos")
 @CrossOrigin("*")
-public class ClienteController {
-
+public class SaidaVeiculoController {
+    
+    
     @Autowired
-    private ClienteRepository repository;
+    private SaidaVeiculoRepository repository;
 
     @PostMapping
-    public Cliente salvar(@RequestBody Cliente cliente) {
-        return repository.save(cliente);
+    public SaidaVeiculo salvar(@RequestBody SaidaVeiculo saidaVeiculo) {
+        return repository.save(saidaVeiculo);
     }
 
     @GetMapping
-    public List<Cliente> listar() {
+    public List<SaidaVeiculo> listar() {
         return repository.findAll();
-    }    
-    
+    }   
+
 }

@@ -1,24 +1,21 @@
-var app = angular.module('appCadastro', []);
+var app = angular.module('appCadastro', [
+    'ngMaterial',
+    'ngRoute'
+]);
 
-app.controller('ClienteController', function ($scope, $http) {
+app.config(function ($routeProvider) {
 
-    $scope.cliente = {};
-    $scope.clientes = [];
+    $routeProvider
+        .when('/colaborador', {
+            templateUrl: 'views/colaborador.html',
+            controller: 'ColaboradorController'
+        })
+        .when('/saidaveiculo', {
+            templateUrl: 'views/saidaveiculo.html',
+            controller: 'SaidaVeiculoController'
+        })
+        .otherwise({
+            redirectTo: '/saidaveiculo'
+        });
 
-    $scope.listar = function () {
-        $http.get('/api/clientes')
-            .then(function (response) {
-                $scope.clientes = response.data;
-            });
-    };
-
-    $scope.salvar = function () {
-        $http.post('/api/clientes', $scope.cliente)
-            .then(function () {
-                $scope.cliente = {};
-                $scope.listar();
-            });
-    };
-
-    $scope.listar();
 });
