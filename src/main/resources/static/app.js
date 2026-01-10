@@ -10,12 +10,16 @@ app.config(function ($routeProvider) {
             templateUrl: 'views/colaborador.html',
             controller: 'ColaboradorController'
         })
-        .when('/saidaveiculo', {
+        .when('/saidaveiculos', {
             templateUrl: 'views/saidaveiculo.html',
             controller: 'SaidaVeiculoController'
         })
+        .when('/veiculo', {
+            templateUrl: 'views/veiculo.html',
+            controller: 'VeiculoController'
+        })        
         .otherwise({
-            redirectTo: '/saidaveiculo'
+            redirectTo: '/saidaveiculos'
         });
 
 });

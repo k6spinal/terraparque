@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Sistema de Controle</title>
 
+    <!-- ESSENCIAL PARA MOBILE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- Angular Material CSS -->
     <link rel="stylesheet"
           href="https://ajax.googleapis.com/ajax/libs/angular_material/1.2.3/angular-material.min.css">
@@ -26,12 +29,15 @@
         <h2>Controle de Portaria</h2>
         <span flex></span>
 
+        <md-button class="md-raised md-primary" href="#!/veiculo">
+            Veículos
+        </md-button>
 
         <md-button class="md-raised md-primary" href="#!/colaborador">
             Colaboradores
         </md-button>
 
-        <md-button class="md-raised md-warn" href="#!/saidaveiculo">
+        <md-button class="md-raised md-warn" href="#!/saidaveiculos">
             Saída
         </md-button>
     </div>
@@ -50,6 +56,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-animate.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-aria.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-messages.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.2.3/angular-material.min.js"></script>
 
 <!-- Angular Material -->
 <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.2.3/angular-material.min.js"></script>
@@ -63,6 +71,56 @@
 <!-- Controllers -->
 <script src="controllers/colaborador.controller.js"></script>
 <script src="controllers/saidaVeiculo.controller.js"></script>
+<script src="controllers/saidaVeiculoRetorno.controller.js"></script>
+<script src="controllers/veiculo.controller.js"></script>
+
+<style>
+    .tabela-saida {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .tabela-saida th,
+    .tabela-saida td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+        word-wrap: break-word;
+    }
+
+    .tabela-saida th {
+        font-weight: 600;
+        background-color: #f5f5f5;
+    }
+
+    .tabela-saida tr:hover {
+        background-color: #fafafa;
+    }
+
+    /* Corrige conflitos do Angular Material com tabelas */
+.desktop-table table {
+    width: 100%;
+    border-collapse: collapse !important;
+}
+
+.desktop-table th,
+.desktop-table td {
+    border: 1px solid #dee2e6 !important;
+    padding: 8px 12px !important;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.desktop-table thead th {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.desktop-table tbody tr:hover {
+    background-color: #f5f5f5;
+}
+</style>
 
 </body>
 </html>

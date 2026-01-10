@@ -6,6 +6,7 @@ app.controller('ColaboradorController', function ($scope, $http) {
     $scope.colaboradores = [];
     
 $scope.listar = function () {
+    console.log("Chamando GET colaboradores");
     $http.get('/api/colaborador')
         .then(function (response) {
             $scope.colaboradores = response.data;

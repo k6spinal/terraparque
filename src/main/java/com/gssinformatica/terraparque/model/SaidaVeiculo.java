@@ -1,11 +1,14 @@
 package com.gssinformatica.terraparque.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,11 +19,13 @@ public class SaidaVeiculo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100)
-    private String nomeMotorista;
+    @ManyToOne
+    @JoinColumn(name = "colaboradorId", nullable = false)
+    private Colaborador colaborador;
 
-    @Column(nullable = false, length = 100)
-    private String veiculoPlaca;
+    @ManyToOne
+    @JoinColumn(name = "veiculoId", nullable = false)
+    private Veiculo veiculo;
 
     @Column(nullable = false, length = 100)
     private String veiculoKm;
@@ -34,11 +39,20 @@ public class SaidaVeiculo {
     @Column(nullable = false)
     private Date dataHoraSaida;
 
-   // @Column(nullable = false)
-   // private boolean retorna;
+    private LocalDateTime dataHoraRetorno;
+
+    private Long veiculoKmRetorno;
+
+    private Boolean emTransito;
+
+
+
 
     public SaidaVeiculo() {
     }
+
+
+
 
     public Long getId() {
         return id;
@@ -47,23 +61,7 @@ public class SaidaVeiculo {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public String getNomeMotorista() {
-        return nomeMotorista;
-    }
-
-    public void setNomeMotorista(String nomeMotorista) {
-        this.nomeMotorista = nomeMotorista;
-    }
-
-    public String getVeiculoPlaca() {
-        return veiculoPlaca;
-    }
-
-    public void setVeiculoPlaca(String veiculoPlaca) {
-        this.veiculoPlaca = veiculoPlaca;
-    }
-
+ 
     public String getVeiculoKm() {
         return veiculoKm;
     }
@@ -96,7 +94,48 @@ public class SaidaVeiculo {
         this.dataHoraSaida = dataHoraSaida;
     }
 
+    public LocalDateTime getDataHoraRetorno() {
+        return dataHoraRetorno;
+    }
 
+
+    public void setDataHoraRetorno(LocalDateTime dataHoraRetorno) {
+        this.dataHoraRetorno = dataHoraRetorno;
+    }
+
+    public Long getVeiculoKmRetorno() {
+        return veiculoKmRetorno;
+    }
+
+    public void setVeiculoKmRetorno(Long veiculoKmRetorno) {
+        this.veiculoKmRetorno = veiculoKmRetorno;
+    }
+
+    public Boolean getEmTransito() {
+        return emTransito;
+    }
+
+    public void setEmTransito(Boolean emTransito) {
+        this.emTransito = emTransito;
+    }
+
+    public Colaborador getColaborador() {
+        return colaborador;
+    }
+
+    public void setColaborador(Colaborador colaborador) {
+        this.colaborador = colaborador;
+    }
+
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
+
+    
 
     
 

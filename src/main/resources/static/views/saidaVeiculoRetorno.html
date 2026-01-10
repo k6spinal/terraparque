@@ -1,0 +1,49 @@
+<md-dialog aria-label="Registrar Retorno">
+    <form>
+
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Registrar Retorno</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancelar()">
+                    ✕
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content class="md-padding">
+
+            <p><strong>Motorista:</strong> {{saida.colaborador.nome}}</p>
+            <p><strong>Placa:</strong> {{saida.veiculoPlaca}}</p>
+
+            <md-input-container class="md-block">
+                <label>Data e Hora do Retorno</label>
+                <input type="datetime-local"
+                       ng-model="saida.dataHoraRetorno"
+                       required>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>KM no Retorno</label>
+                <input type="number"
+                       ng-model="saida.veiculoKmRetorno"
+                       min="{{saida.veiculoKm}}">
+            </md-input-container>
+
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+
+            <md-button ng-click="cancelar()">
+                Cancelar
+            </md-button>
+
+            <md-button class="md-raised md-primary"
+                       ng-click="salvar()">
+                Salvar Retorno
+            </md-button>
+        </md-dialog-actions>
+
+    </form>
+</md-dialog>

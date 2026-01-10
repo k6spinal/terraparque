@@ -1,46 +1,43 @@
-<!DOCTYPE html>
-<html ng-app="saidaVeiculoCadastro" >
-<head>
-    <meta charset="UTF-8">
-    <title>Saída de Veículo</title>
 
- <!-- AngularJS -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-
-<!-- AngularJS Animate e Aria (OBRIGATÓRIOS) -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-animate.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-aria.min.js"></script>
-
-<!-- Angular Material -->
-<link rel="stylesheet"
-      href="https://ajax.googleapis.com/ajax/libs/angular_material/1.2.5/angular-material.min.css">
-
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.2.5/angular-material.min.js"></script>
-
-    <script src="app.js"></script>
-    <script src="saidaVeiculo.controller.js"></script>
-</head>
-
-<body ng-app="appCadastro" ng-controller="SaidaVeiculoController" layout="column">
-    
-    <md-content layout-padding>
+    <div ng-controller="SaidaVeiculoController">
 
     <h2>Nova Saída</h2>
 
     <form ng-submit="salvar()">
+        <label>Motorista</label>
+        
         <md-input-container class="md-block">
             <label>Motorista</label>
-            <input ng-model="saida.nomeMotorista" required>
+
+            <md-select
+                ng-model="saida.colaborador.id"
+                required>
+
+                <md-option
+                    ng-repeat="c in colaboradores"
+                    ng-value="c.id">
+                    {{c.nome}}
+                </md-option>
+
+            </md-select>
         </md-input-container>
 
+        <label>Motorista</label>
+        
         <md-input-container class="md-block">
-            <label>Motorista</label>
-            <input ng-model="saida.nomeMotorista" required>
-        </md-input-container>
+            <label>Veiculo</label>
 
-        <md-input-container class="md-block">
-            <label>Placa do Veículo</label>
-            <input ng-model="saida.veiculoPlaca" required>
+            <md-select
+                ng-model="saida.veiculo.id"
+                required>
+
+                <md-option
+                    ng-repeat="v in veiculos"
+                    ng-value="v.id">
+                    {{v.placa}} - {{v.marcaModelo}}
+                </md-option>
+
+            </md-select>
         </md-input-container>
 
         <md-input-container class="md-block">
@@ -70,25 +67,108 @@
 
     <hr>
 
-    <table border="1">
-        <tr>
-            <th>Nome do Motorista</th>
-            <th>Placa do Veículo</th>
-            <th>KM do Veículo</th>
-            <th>Motivo da Saída</th>
-            <th>Observações da Saída</th>
-            <th>Data e Hora da Saída</th>
-        </tr>
-        <tr ng-repeat="s in saidas">
-            <td>{{s.nomeMotorista}}</td>
-            <td>{{s.veiculoPlaca}}</td>
-            <td>{{s.veiculoKm}}</td>
-            <td>{{s.motivoSaida}}</td>
-            <td>{{s.observacoes}}</td>
-            <td>{{s.dataHoraSaida}}</td>
-        </tr>
+<!-- ================= DESKTOP / TABLET ================= -->
+<div ng-show="$mdMedia('gt-sm')" class="desktop-table">
+
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Motorista</th>
+                <th>Placa</th>
+                <th>KM</th>
+                <th>Motivo</th>
+                <th>Observações</th>
+                <th>Data - Saída</th>
+                <th>Status</th>
+                <th>Retorno</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="s in saidas">
+                <td>{{s.colaborador.nome}}</td>
+                <td>{{s.veiculoPlaca}}</td>
+                <td>{{s.veiculoKm}}</td>
+                <td>{{s.motivoSaida}}</td>
+                <td>{{s.observacoes}}</td>
+                <td>{{s.dataHoraSaida | date:'dd/MM/yyyy HH:mm'}}</td>
+                <!-- STATUS -->
+                <td>
+                    <span class="badge bg-warning text-dark"
+                        ng-if="s.emTransito">
+                        Em trânsito
+                    </span>
+
+                </td>
+
+                <!-- RETORNO -->
+                <td>
+                    <div ng-if="!s.emTransito">
+                        <small>
+                            {{s.dataHoraRetorno | date:'dd/MM/yyyy HH:mm'}}
+                            <br>
+                            KM: {{s.veiculoKmRetorno}}
+                        </small>
+                    </div>
+
+                    <span ng-if="s.emTransito">—</span>
+                </td>
+
+                <!-- AÇÃO -->
+                <td>
+                    <md-button
+                        class="md-raised md-accent md-sm"
+                        ng-if="s.emTransito"
+                        ng-click="abrirDialogRetorno(s)">
+                        Registrar
+                    </md-button>
+                </td>
+
+            </tr>
+        </tbody>
     </table>
 
-    </md-content>
-</body>
-</html>
+</div>
+
+<!-- ================= MOBILE ================= -->
+<div ng-show="$mdMedia('sm') || $mdMedia('xs')">
+
+    <md-card ng-repeat="s in saidas" class="mb-3">
+        <md-card-content>
+            <p><strong>Motorista:</strong> {{s.colaborador.nome}}</p>
+            <p><strong>Placa:</strong> {{s.veiculoPlaca}}</p>
+            <p><strong>KM:</strong> {{s.veiculoKm}}</p>
+            <p><strong>Motivo:</strong> {{s.motivoSaida}}</p>
+            <p><strong>Obs:</strong> {{s.observacoes}}</p>
+            <p><strong>Data:</strong> {{s.dataHoraSaida | date:'dd/MM/yyyy HH:mm'}}</p>
+            <p>
+                <strong>Status:</strong>
+                <span ng-if="s.emTransito" class="text-warning">
+                    Em trânsito
+                </span>
+                <span ng-if="!s.emTransito" class="text-success">
+                    Finalizado
+                </span>
+            </p>
+
+            <!-- RETORNO (só se existir) -->
+            <div ng-if="!s.emTransito">
+                <p><strong>Retorno:</strong>
+                {{s.dataHoraRetorno | date:'dd/MM/yyyy HH:mm'}}
+                </p>
+                <p><strong>KM Retorno:</strong> {{s.veiculoKmRetorno}}</p>
+            </div>
+
+            <!-- BOTÃO -->
+                <md-button
+                    class="md-raised md-accent md-sm"
+                    ng-if="s.emTransito"
+                    ng-click="abrirDialogRetorno(s)">
+                    Registrar
+                </md-button>    
+        </md-card-content>
+    </md-card>
+
+</div>
+</div>
